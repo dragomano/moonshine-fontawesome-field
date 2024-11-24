@@ -1,9 +1,16 @@
-# MoonShine FontAwesomeIcon Field
+# MoonShine FontAwesome Field
 
 ![PHP](https://img.shields.io/badge/PHP-^8.1-blue.svg?style=flat)
 [![Coverage Status](https://coveralls.io/repos/github/dragomano/moonshine-fontawesome-field/badge.svg?branch=main)](https://coveralls.io/github/dragomano/moonshine-fontawesome-field?branch=main)
 
 Convenient Font Awesome icons selection field for [MoonShine](https://github.com/moonshine-software/moonshine)
+
+### Support MoonShine versions
+
+| MoonShine | This package |
+| --------- | ------------ |
+| 2.0+      | 0.x          |
+| 3.0+      | 1.x          |
 
 ## Installation
 
