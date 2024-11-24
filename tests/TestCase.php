@@ -27,7 +27,7 @@ abstract class TestCase extends Orchestra
         $this->artisan(InstallCommand::class, [
             '--without-user' => true,
             '--without-migrations' => true,
-	        '--tests-mode' => true,
+            '--tests-mode' => true,
         ]);
 
         $this->artisan('optimize:clear');

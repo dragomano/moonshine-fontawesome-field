@@ -38,29 +38,29 @@ test('assets are correctly defined', function () {
 });
 
 describe('override methods', function () {
-	it('overrides option', function (): void {
-		expect(
-			$this->field->options(new Options([
-				new Option(
-					'panda',
-					'panda',
-					properties: new OptionProperty('https://www.svgrepo.com/show/397179/panda.svg')
-				)
-			]))
-				->getValues()
-				->toArray()
-		)->toBe([]);
-	});
+    it('overrides option', function (): void {
+        expect(
+            $this->field->options(new Options([
+                new Option(
+                    'panda',
+                    'panda',
+                    properties: new OptionProperty('https://www.svgrepo.com/show/397179/panda.svg')
+                )
+            ]))
+                ->getValues()
+                ->toArray()
+        )->toBe([]);
+    });
 
-	it('overrides optionProperties', function (): void {
-		expect(
-			$this->field->optionProperties(fn() => [
-				'fas fa-panda' => ['image' => 'https://www.svgrepo.com/show/397179/panda.svg']
-			])
-				->getValues()
-				->toArray()
-		)->toBe([]);
-	});
+    it('overrides optionProperties', function (): void {
+        expect(
+            $this->field->optionProperties(fn() => [
+                'fas fa-panda' => ['image' => 'https://www.svgrepo.com/show/397179/panda.svg']
+            ])
+                ->getValues()
+                ->toArray()
+        )->toBe([]);
+    });
 });
 
 test('resolvePreview returns empty string for empty value', function () {
@@ -69,7 +69,7 @@ test('resolvePreview returns empty string for empty value', function () {
 
 test('getStyleFromDirectory returns correct style', function () {
     $method = new ReflectionMethod(Icon::class, 'getStyleFromDirectory');
-	$method->setAccessible(true);
+    $method->setAccessible(true);
 
     expect($method->invoke($this->field, IconType::BRANDS->name()))->toBe(IconType::BRANDS->value)
         ->and($method->invoke($this->field, IconType::REGULAR->name()))->toBe(IconType::REGULAR->value)
