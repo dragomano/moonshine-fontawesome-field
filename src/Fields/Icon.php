@@ -1,19 +1,8 @@
 <?php declare(strict_types=1);
 
-/**
- * Icon.php
- *
- * @package bugo/moonshine-fontawesome-field
- * @link https://github.com/dragomano/moonshine-fontawesome-field
- * @author Bugo <bugo@dragomano.ru>
- * @copyright 2024 Bugo
- * @license https://opensource.org/licenses/MIT MIT
- *
- * @version 0.1
- */
-
 namespace Bugo\MoonShine\FontAwesome\Fields;
 
+use Bugo\MoonShine\FontAwesome\Enums\IconType;
 use Closure;
 use Illuminate\Support\Facades\Cache;
 use MoonShine\Fields\Select;
@@ -33,12 +22,12 @@ class Icon extends Select
         $this->optionProperties = fn() => $this->getCustomOptionProperties();
     }
 
-    public function options(array|Closure $data): static
+    public function options(Closure|array $data): static
     {
         return $this;
     }
 
-    public function optionProperties(array|Closure $data): static
+    public function optionProperties(Closure|array $data): static
     {
         return $this;
     }
@@ -72,9 +61,9 @@ class Icon extends Select
     private function getStyleFromDirectory(string $name): string
     {
         return match ($name) {
-            'brands'  => 'fab fa-',
-            'regular' => 'far fa-',
-            default   => 'fas fa-'
+            IconType::BRANDS->name() => IconType::BRANDS->value,
+            IconType::REGULAR->name() => IconType::REGULAR->value,
+            default => IconType::SOLID->value
         };
     }
 
@@ -84,9 +73,9 @@ class Icon extends Select
     private function getDirectoryFromStyle(string $style): string
     {
         return match (true) {
-            str_contains($style, 'fab fa-') => 'brands',
-            str_contains($style, 'far fa-') => 'regular',
-            default => 'solid',
+            str_contains($style, IconType::BRANDS->value) => IconType::BRANDS->name(),
+            str_contains($style, IconType::REGULAR->value) => IconType::REGULAR->name(),
+            default => IconType::SOLID->name(),
         };
     }
 
@@ -95,7 +84,7 @@ class Icon extends Select
      */
     private function getShortName(string $name): string
     {
-        return preg_replace('/fas fa-|fab fa-|far fa-/', '', $name);
+        return preg_replace('/' . IconType::toString() . '/', '', $name);
     }
 
     /**
@@ -104,7 +93,7 @@ class Icon extends Select
     private function getCustomOptions(): array
     {
         return Cache::rememberForever("fontawesome-field-options", function () {
-            $items = array_map(function($file) {
+            $items = array_map(function ($file) {
                 $directory = basename(dirname($file));
                 $filename = basename($file, '.svg');
                 return $this->getStyleFromDirectory($directory) . $filename;
