@@ -29,7 +29,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use Bugo\MoonShine\Heroicons\Fields\Icon;
+use Bugo\MoonShine\FontAwesome\Fields\Icon;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
