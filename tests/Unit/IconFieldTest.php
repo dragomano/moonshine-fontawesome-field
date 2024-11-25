@@ -69,7 +69,6 @@ test('resolvePreview returns empty string for empty value', function () {
 
 test('getStyleFromDirectory returns correct style', function () {
     $method = new ReflectionMethod(Icon::class, 'getStyleFromDirectory');
-    $method->setAccessible(true);
 
     expect($method->invoke($this->field, IconType::BRANDS->name()))->toBe(IconType::BRANDS->value)
         ->and($method->invoke($this->field, IconType::REGULAR->name()))->toBe(IconType::REGULAR->value)
@@ -78,7 +77,6 @@ test('getStyleFromDirectory returns correct style', function () {
 
 test('getDirectoryFromStyle returns correct directory', function () {
     $method = new ReflectionMethod(Icon::class, 'getDirectoryFromStyle');
-    $method->setAccessible(true);
 
     expect($method->invoke($this->field, 'fab fa-'))->toBe(IconType::BRANDS->name())
         ->and($method->invoke($this->field, 'far fa-'))->toBe(IconType::REGULAR->name())
@@ -87,7 +85,6 @@ test('getDirectoryFromStyle returns correct directory', function () {
 
 test('getShortName removes style prefix', function () {
     $method = new ReflectionMethod(Icon::class, 'getShortName');
-    $method->setAccessible(true);
 
     expect($method->invoke($this->field, 'fas fa-user'))->toBe('user');
 });

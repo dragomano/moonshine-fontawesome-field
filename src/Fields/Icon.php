@@ -37,6 +37,9 @@ class Icon extends Select
         return $this;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     protected function resolvePreview(): string
     {
         $value = parent::resolvePreview();
@@ -45,7 +48,6 @@ class Icon extends Select
             return '';
         }
 
-	    // @codeCoverageIgnoreStart
         $icons = array_filter(explode(',', $value));
 
         $result = array_map(
@@ -55,7 +57,6 @@ class Icon extends Select
 
         return (string) Preview::make(formatted: static fn() => implode('', $result))
             ->setAttribute('class', 'flex items-center');
-	    // @codeCoverageIgnoreEnd
     }
 
     private function getStyleFromDirectory(string $name): string
@@ -81,9 +82,11 @@ class Icon extends Select
         return preg_replace('/' . IconType::toString() . '/', '', $name);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     private function getCustomOptions(): array
     {
-	    // @codeCoverageIgnoreStart
         return Cache::rememberForever("fontawesome-field-options", function () {
             $items = array_map(function ($file) {
                 $directory = basename(dirname($file));
@@ -93,12 +96,13 @@ class Icon extends Select
 
             return array_combine($items, $items);
         });
-	    // @codeCoverageIgnoreEnd
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     private function getCustomOptionProperties(): array
     {
-	    // @codeCoverageIgnoreStart
         return Cache::rememberForever("fontawesome-field-option-properties", function () {
             $link = asset("vendor/blade-fontawesome/%s/%s.svg");
 
@@ -109,6 +113,5 @@ class Icon extends Select
                 $this->getCustomOptions()
             );
         });
-	    // @codeCoverageIgnoreEnd
     }
 }
