@@ -19,7 +19,7 @@ class Icon extends Select
         parent::__construct($label, $column, $formatted);
 
         $this->options = $this->getCustomOptions();
-        $this->optionProperties = fn() => $this->getCustomOptionProperties();
+        $this->optionProperties = $this->getCustomOptionProperties();
     }
 
     public function options(Closure|array $data): static
@@ -92,12 +92,19 @@ class Icon extends Select
      */
     private function getCustomOptions(): array
     {
-        return Cache::rememberForever("fontawesome-field-options", function () {
+        return Cache::rememberForever("fontawesome_field_options", function () {
+            $files = glob(public_path("vendor/blade-fontawesome/*/*.svg"));
+
+            if (empty($files)) {
+                return [];
+            }
+
             $items = array_map(function ($file) {
                 $directory = basename(dirname($file));
                 $filename = basename($file, '.svg');
+
                 return $this->getStyleFromDirectory($directory) . $filename;
-            }, glob(public_path("vendor/blade-fontawesome/*/*.svg"), GLOB_BRACE));
+            }, $files);
 
             return array_combine($items, $items);
         });
@@ -105,7 +112,7 @@ class Icon extends Select
 
     private function getCustomOptionProperties(): array
     {
-        return Cache::rememberForever("fontawesome-field-option-properties", function () {
+        return Cache::rememberForever("fontawesome_field_option_properties", function () {
             $link = asset("vendor/blade-fontawesome/%s/%s.svg");
 
             return array_map(
