@@ -7,7 +7,9 @@ use Closure;
 use Illuminate\Support\Facades\Cache;
 use JsonException;
 use MoonShine\AssetManager\Css;
+use MoonShine\Support\DTOs\Select\OptionImage;
 use MoonShine\Support\DTOs\Select\Options;
+use MoonShine\Support\Enums\ObjectFit;
 use MoonShine\UI\Fields\Preview;
 use MoonShine\UI\Fields\Select;
 
@@ -98,7 +100,7 @@ class Icon extends Select
 
             $items = array_map(function ($file) {
                 $directory = basename(dirname($file));
-                $filename = basename($file, '.svg');
+                $filename  = basename($file, '.svg');
 
                 return $this->getStyleFromDirectory($directory) . $filename;
             }, $files);
@@ -117,7 +119,12 @@ class Icon extends Select
 
             return array_map(
                 fn($item) => [
-                    'image' => sprintf($link, $this->getDirectoryFromStyle($item), $this->getShortName($item))
+                    'image' => new OptionImage(
+                        sprintf($link, $this->getDirectoryFromStyle($item), $this->getShortName($item)),
+                        6,
+                        6,
+                        ObjectFit::CONTAIN
+                    )
                 ],
                 $this->getCustomOptions()
             );
