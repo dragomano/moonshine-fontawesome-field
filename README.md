@@ -20,7 +20,7 @@ composer require bugo/moonshine-fontawesome-field
 
 ## Usage
 
-You can use `Icon` field in your resources:
+You can use `IconSelect` field in your resources:
 
 ```php
 <?php
@@ -29,7 +29,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use Bugo\MoonShine\FontAwesome\Fields\Icon;
+use Bugo\MoonShine\FontAwesome\Fields\IconSelect;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -45,7 +45,7 @@ class CustomResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Icon::make('Icon')
+            IconSelect::make('Icon')
                 ->searchable(),
         ];
     }
