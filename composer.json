@@ -16,6 +16,7 @@
   ],
   "require": {
     "php": "^8.2",
+    "madzee-m/moonshine-tom-select": "^1.0",
     "owenvoke/blade-fontawesome": "^2.7"
   },
   "require-dev": {
