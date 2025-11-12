@@ -8,15 +8,23 @@ class IconServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../../public' => public_path('vendor/moonshine-fontawesome-field'),
-            ], ['moonshine-fontawesome-field', 'laravel-assets']);
+	    $paths = [
+		    [
+			    'from' => __DIR__ . '/../../public',
+			    'to' => public_path('vendor/moonshine-fontawesome-field'),
+			    'groups' => ['moonshine-fontawesome-field', 'laravel-assets']
+		    ],
+		    [
+			    'from' => base_path() . '/vendor/owenvoke/blade-fontawesome/resources/svg',
+			    'to' => public_path('vendor/blade-fontawesome'),
+			    'groups' => ['blade-fontawesome', 'laravel-assets']
+		    ],
+	    ];
 
-            $this->publishes([
-                base_path() . '/vendor/owenvoke/blade-fontawesome/resources/svg'
-                    => public_path('vendor/blade-fontawesome'),
-            ], ['blade-fontawesome', 'laravel-assets']);
-        }
+	    if ($this->app->runningInConsole()) {
+		    foreach ($paths as $path) {
+			    $this->publishes([$path['from'] => $path['to']], $path['groups']);
+		    }
+	    }
     }
 }

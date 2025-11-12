@@ -3,7 +3,6 @@
 use Bugo\MoonShine\FontAwesome\Enums\IconType;
 use Bugo\MoonShine\FontAwesome\Fields\Icon;
 use Illuminate\Database\Eloquent\Model;
-use MoonShine\AssetManager\Css;
 use MoonShine\Support\DTOs\Select\Option;
 use MoonShine\Support\DTOs\Select\OptionProperty;
 use MoonShine\Support\DTOs\Select\Options;

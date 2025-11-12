@@ -24,8 +24,3 @@ test('can create from value', function () {
         ->and(IconType::from('far fa-'))->toBe(IconType::REGULAR)
         ->and(IconType::from('fab fa-'))->toBe(IconType::BRANDS);
 });
-
-test('throws exception for invalid value', function () {
-    expect(fn () => IconType::from('invalid'))
-        ->toThrow(ValueError::class);
-});

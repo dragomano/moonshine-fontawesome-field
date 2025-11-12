@@ -6,14 +6,14 @@ use Bugo\MoonShine\FontAwesome\Enums\IconType;
 use Closure;
 use Illuminate\Support\Facades\Cache;
 use JsonException;
-use MadZeeM\MoonshineTomSelect\Fields\TomSelect;
 use MoonShine\AssetManager\Css;
 use MoonShine\Support\DTOs\Select\OptionImage;
 use MoonShine\Support\DTOs\Select\Options;
 use MoonShine\Support\Enums\ObjectFit;
 use MoonShine\UI\Fields\Preview;
+use MoonShine\UI\Fields\Select;
 
-class Icon extends TomSelect
+class Icon extends Select
 {
     public function __construct(Closure|string|null $label = null, ?string $column = null, ?Closure $formatted = null)
     {
