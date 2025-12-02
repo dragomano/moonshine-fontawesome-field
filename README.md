@@ -59,6 +59,15 @@ All use cases of [Blade Font Awesome](https://github.com/owenvoke/blade-fontawes
 
 When using icons in Blade templates, be sure to enable [Caching](https://github.com/blade-ui-kit/blade-icons?tab=readme-ov-file#caching).
 
+## How to update icon sets
+
+Once the package is installed, run these commands:
+
+```sh
+pnpm add @fortawesome/fontawesome-free -D
+php artisan moonshine:update-fa-icons
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first

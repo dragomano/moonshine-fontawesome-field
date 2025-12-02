@@ -16,7 +16,7 @@
   ],
   "require": {
     "php": "^8.2",
-    "owenvoke/blade-fontawesome": "^2.9"
+    "owenvoke/blade-fontawesome": "dev-php_82"
   },
   "require-dev": {
     "moonshine/moonshine": "^4.0",
@@ -25,6 +25,12 @@
     "pestphp/pest-plugin-laravel": "^3.2",
     "rector/rector": "^2.2"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/dragomano/blade-fontawesome.git"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Bugo\\MoonShine\\FontAwesome\\": "src/"

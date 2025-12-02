@@ -11,5 +11,8 @@
         <include>
             <directory suffix=".php">./src</directory>
         </include>
+        <exclude>
+            <file>./src/Commands/UpdateIconsCommand.php</file>
+        </exclude>
     </source>
 </phpunit>

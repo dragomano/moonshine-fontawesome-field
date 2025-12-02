@@ -8,11 +8,6 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
     protected function defineEnvironment($app): void
     {
         $app['config']->set('app.debug', 'true');
