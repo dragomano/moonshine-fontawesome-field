@@ -16,15 +16,15 @@ class UpdateIconsCommand extends Command
         $sets = [
             base_path('node_modules/@fortawesome/fontawesome-free/svgs/regular') => [
                 public_path('vendor/blade-fontawesome/regular'),
-                base_path('vendor/owenvoke/blade-fontawesome/resources/svg/regular'),
+                base_path('vendor/bugo/blade-fontawesome/resources/svg/regular'),
             ],
             base_path('node_modules/@fortawesome/fontawesome-free/svgs/brands') => [
                 public_path('vendor/blade-fontawesome/brands'),
-                base_path('vendor/owenvoke/blade-fontawesome/resources/svg/brands'),
+                base_path('vendor/bugo/blade-fontawesome/resources/svg/brands'),
             ],
             base_path('node_modules/@fortawesome/fontawesome-free/svgs/solid') => [
                 public_path('vendor/blade-fontawesome/solid'),
-                base_path('vendor/owenvoke/blade-fontawesome/resources/svg/solid'),
+                base_path('vendor/bugo/blade-fontawesome/resources/svg/solid'),
             ],
         ];
 

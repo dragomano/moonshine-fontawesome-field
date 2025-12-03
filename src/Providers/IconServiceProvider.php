@@ -13,12 +13,12 @@ class IconServiceProvider extends ServiceProvider
             [
                 'from' => __DIR__ . '/../../public',
                 'to' => public_path('vendor/moonshine-fontawesome-field'),
-                'groups' => ['moonshine-fontawesome-field', 'laravel-assets']
+                'groups' => ['moonshine-fontawesome-field', 'laravel-assets'],
             ],
             [
-                'from' => base_path() . '/vendor/owenvoke/blade-fontawesome/resources/svg',
+                'from' => base_path() . '/vendor/bugo/blade-fontawesome/resources/svg',
                 'to' => public_path('vendor/blade-fontawesome'),
-                'groups' => ['blade-fontawesome', 'laravel-assets']
+                'groups' => ['blade-fontawesome', 'laravel-assets'],
             ],
         ];
 
