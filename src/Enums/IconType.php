@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Bugo\MoonShine\FontAwesome\Enums;
 
@@ -15,6 +17,6 @@ enum IconType: string
 
     public static function toString(): string
     {
-        return implode('|', array_map(fn($item) => $item->value, self::cases()));
+        return implode('|', array_map(fn ($item) => $item->value, self::cases()));
     }
 }

@@ -1,10 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests;
 
+use BladeUI\Icons\BladeIconsServiceProvider;
 use Bugo\MoonShine\FontAwesome\Providers\IconServiceProvider;
 use MoonShine\Laravel\Providers\MoonShineServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use OwenVoke\BladeFontAwesome\BladeFontAwesomeServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -17,8 +21,10 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            MoonShineServiceProvider::class,
+            BladeFontAwesomeServiceProvider::class,
+            BladeIconsServiceProvider::class,
             IconServiceProvider::class,
+            MoonShineServiceProvider::class,
         ];
     }
 }

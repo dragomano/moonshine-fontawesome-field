@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Bugo\MoonShine\FontAwesome\Providers;
 
@@ -16,7 +18,7 @@ class IconServiceProvider extends ServiceProvider
                 'groups' => ['moonshine-fontawesome-field', 'laravel-assets'],
             ],
             [
-                'from' => base_path() . '/vendor/bugo/blade-fontawesome/resources/svg',
+                'from' => base_path() . '/vendor/owenvoke/blade-fontawesome/resources/svg',
                 'to' => public_path('vendor/blade-fontawesome'),
                 'groups' => ['blade-fontawesome', 'laravel-assets'],
             ],

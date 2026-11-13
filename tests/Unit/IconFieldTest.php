@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use Bugo\MoonShine\FontAwesome\Enums\IconType;
 use Bugo\MoonShine\FontAwesome\Fields\Icon;
@@ -13,7 +15,8 @@ uses(TestCase::class);
 beforeEach(function (): void {
     $this->field = Icon::make('Icon');
 
-    $this->item = new class () extends Model {
+    $this->item = new class extends Model
+    {
         public string $icon = 'fas fa-user';
     };
 
@@ -34,7 +37,7 @@ describe('override methods', function () {
                     'panda',
                     'panda',
                     properties: new OptionProperty('https://www.svgrepo.com/show/397179/panda.svg')
-                )
+                ),
             ]))
                 ->getValues()
                 ->toArray()
@@ -43,8 +46,8 @@ describe('override methods', function () {
 
     it('overrides optionProperties', function (): void {
         expect(
-            $this->field->optionProperties(fn() => [
-                'fas fa-panda' => ['image' => 'https://www.svgrepo.com/show/397179/panda.svg']
+            $this->field->optionProperties(fn () => [
+                'fas fa-panda' => ['image' => 'https://www.svgrepo.com/show/397179/panda.svg'],
             ])
                 ->getValues()
                 ->toArray()
@@ -53,7 +56,7 @@ describe('override methods', function () {
 });
 
 test('resolvePreview returns empty string for empty value', function () {
-    expect($this->field->preview())->toBe('');
+    expect(Icon::make('Icon')->preview())->toBe('');
 });
 
 test('getStyleFromDirectory returns correct style', function () {
@@ -76,4 +79,35 @@ test('getShortName removes style prefix', function () {
     $method = new ReflectionMethod(Icon::class, 'getShortName');
 
     expect($method->invoke($this->field, 'fas fa-user'))->toBe('user');
+});
+
+describe('rendering', function () {
+    beforeEach(function (): void {
+        publishFontAwesomeIcons('user');
+    });
+
+    afterEach(function (): void {
+        removePublishedFontAwesomeIcons();
+    });
+
+    it('renders svg markup in preview without escaping', function (): void {
+        $field = Icon::make('Icon');
+
+        fillFromModel($field, $this->item);
+
+        $preview = (string) $field->preview();
+
+        expect($preview)
+            ->toContain('<svg')
+            ->not->toContain('&lt;svg');
+    });
+
+    it('adds image property to options', function (): void {
+        $options = Icon::make('Icon')->getValues()->toArray();
+
+        expect($options)->toHaveKey('fas fa-user')
+            ->and($options['fas fa-user']['properties']['image']['src'])
+            ->toContain('vendor/blade-fontawesome/solid/user.svg')
+            ->and($options['fas fa-user']['properties']['image']['objectFit'])->toBe('contain');
+    });
 });

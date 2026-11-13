@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Bugo\MoonShine\FontAwesome\Fields;
 
@@ -15,7 +17,7 @@ use MoonShine\UI\Fields\Select;
 
 class Icon extends Select
 {
-    public function __construct(Closure|string|null $label = null, ?string $column = null, ?Closure $formatted = null)
+    public function __construct(Closure|string|null $label = null, string|null $column = null, Closure|null $formatted = null)
     {
         parent::__construct($label, $column, $formatted);
 
@@ -23,12 +25,12 @@ class Icon extends Select
         $this->optionProperties = $this->getCustomOptionProperties();
     }
 
-    public function options(Closure|array|Options $data): static
+    public function options(array|Closure|Options $data): static
     {
         return $this;
     }
 
-    public function optionProperties(Closure|array $data): static
+    public function optionProperties(array|Closure $data): static
     {
         return $this;
     }
@@ -42,7 +44,6 @@ class Icon extends Select
     }
 
     /**
-     * @codeCoverageIgnore
      * @throws JsonException
      */
     protected function resolvePreview(): string
@@ -56,11 +57,11 @@ class Icon extends Select
         $icons = array_filter(explode(',', $value));
 
         $result = array_map(
-            static fn($icon) => svg(str_replace(' fa', '', $icon), 'h-6 w-6')->toHtml(),
+            static fn (string $icon): string => svg(str_replace(' fa', '', $icon), 'h-6 w-6')->toHtml(),
             $icons
         );
 
-        return (string) Preview::make(formatted: static fn() => implode('', $result))
+        return (string) Preview::make(formatted: static fn (): string => implode('', $result))
             ->setAttribute('class', 'flex items-center');
     }
 
@@ -92,8 +93,8 @@ class Icon extends Select
      */
     private function getCustomOptions(): array
     {
-        return Cache::rememberForever("fontawesome_field_options", function () {
-            $files = glob(public_path("vendor/blade-fontawesome/*/*.svg"));
+        return Cache::rememberForever('fontawesome_field_options', function () {
+            $files = glob(public_path('vendor/blade-fontawesome/*/*.svg'));
 
             if (empty($files)) {
                 return [];
@@ -101,7 +102,7 @@ class Icon extends Select
 
             $items = array_map(function ($file) {
                 $directory = basename(dirname($file));
-                $filename  = basename($file, '.svg');
+                $filename = basename($file, '.svg');
 
                 return $this->getStyleFromDirectory($directory) . $filename;
             }, $files);
@@ -115,17 +116,17 @@ class Icon extends Select
      */
     private function getCustomOptionProperties(): array
     {
-        return Cache::rememberForever("fontawesome_field_option_properties", function () {
-            $link = asset("vendor/blade-fontawesome/%s/%s.svg");
+        return Cache::rememberForever('fontawesome_field_option_properties', function () {
+            $link = asset('vendor/blade-fontawesome/%s/%s.svg');
 
             return array_map(
-                fn($item) => [
+                fn ($item) => [
                     'image' => new OptionImage(
                         sprintf($link, $this->getDirectoryFromStyle($item), $this->getShortName($item)),
                         6,
                         6,
                         ObjectFit::CONTAIN
-                    )
+                    ),
                 ],
                 $this->getCustomOptions()
             );

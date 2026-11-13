@@ -1,6 +1,6 @@
 # MoonShine FontAwesome Field
 
-![PHP](https://img.shields.io/badge/PHP-^8.2-blue.svg?style=flat)
+![PHP](https://img.shields.io/badge/PHP-^8.4-blue.svg?style=flat)
 [![Coverage Status](https://coveralls.io/repos/github/dragomano/moonshine-fontawesome-field/badge.svg?branch=main)](https://coveralls.io/github/dragomano/moonshine-fontawesome-field?branch=main)
 
 Convenient Font Awesome icons selection field for [MoonShine](https://github.com/moonshine-software/moonshine)
@@ -12,6 +12,11 @@ Convenient Font Awesome icons selection field for [MoonShine](https://github.com
 | 2.0+      | 0.x          |
 | 3.0+      | 1.x          |
 | 4.0+      | 2.x          |
+| 5.0+      | 3.x          |
+
+### Requirements
+
+MoonShine 5 requires PHP 8.4+ and Laravel 11, 12 or 13.
 
 ## Installation
 
@@ -54,6 +59,16 @@ class CustomResource extends ModelResource
 ```
 
 All use cases of [Blade Font Awesome](https://github.com/owenvoke/blade-fontawesome?tab=readme-ov-file#usage) are also available for you.
+
+### Escaping
+
+Since MoonShine 5 labels, hints and prefixes are escaped by default.
+If you need raw HTML in them, disable escaping for the specific element:
+
+```php
+IconSelect::make('<strong>Icon</strong>')
+    ->unescapeLabel();
+```
 
 ## Caching
 

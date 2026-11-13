@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Bugo\MoonShine\FontAwesome\Commands;
 
@@ -16,30 +18,33 @@ class UpdateIconsCommand extends Command
         $sets = [
             base_path('node_modules/@fortawesome/fontawesome-free/svgs/regular') => [
                 public_path('vendor/blade-fontawesome/regular'),
-                base_path('vendor/bugo/blade-fontawesome/resources/svg/regular'),
+                base_path('vendor/owenvoke/blade-fontawesome/resources/svg/regular'),
             ],
             base_path('node_modules/@fortawesome/fontawesome-free/svgs/brands') => [
                 public_path('vendor/blade-fontawesome/brands'),
-                base_path('vendor/bugo/blade-fontawesome/resources/svg/brands'),
+                base_path('vendor/owenvoke/blade-fontawesome/resources/svg/brands'),
             ],
             base_path('node_modules/@fortawesome/fontawesome-free/svgs/solid') => [
                 public_path('vendor/blade-fontawesome/solid'),
-                base_path('vendor/bugo/blade-fontawesome/resources/svg/solid'),
+                base_path('vendor/owenvoke/blade-fontawesome/resources/svg/solid'),
             ],
         ];
 
-        $fs = new Filesystem();
+        $fs = new Filesystem;
 
         foreach ($sets as $source => $destinations) {
             if (! $fs->exists($source)) {
                 $this->error("Source directory not found: $source");
+
                 continue;
             }
 
             array_walk($destinations, $fs->ensureDirectoryExists(...));
 
             foreach ($fs->allFiles($source) as $file) {
-                if ($file->getExtension() !== 'svg') continue;
+                if ($file->getExtension() !== 'svg') {
+                    continue;
+                }
 
                 $content = str_replace(
                     '<svg ',
