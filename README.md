@@ -18,6 +18,9 @@ Convenient Font Awesome icons selection field for [MoonShine](https://github.com
 
 MoonShine 5 requires PHP 8.4+ and Laravel 11, 12 or 13.
 
+This package additionally requires **Laravel 12 or 13**: `owenvoke/blade-fontawesome` depends on
+`illuminate/support ^12.0|^13.0`, so Laravel 11 is not supported.
+
 ## Installation
 
 ```bash
